@@ -47,7 +47,7 @@ public class ArtistsContentProvider extends ContentProvider {
                 try {
                     cursor = dbProvider.getArtistsList();
 
-                    if (cursor == null) {
+                    if (cursor == null || cursor.getCount() == 0) {
                         saveArtistsToDb();
                         cursor = dbProvider.getArtistsList();
                     }
