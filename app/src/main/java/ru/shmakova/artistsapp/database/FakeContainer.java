@@ -15,13 +15,4 @@ public class FakeContainer {
         }
         return dbProviderInstance;
     }
-
-    private static DbNotificationManager dbNotificationInstance;
-    public static DbNotificationManager getNotificationInstance(Context context) {
-        context = context.getApplicationContext();
-        if (dbNotificationInstance == null) {
-            dbNotificationInstance = new DbNotificationManager();
-        }
-        return dbNotificationInstance;
-    }
 }

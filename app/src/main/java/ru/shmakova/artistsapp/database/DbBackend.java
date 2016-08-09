@@ -23,7 +23,7 @@ class DbBackend implements DbContract {
         mDbOpenHelper = dbOpenHelper;
     }
 
-    public Cursor getArtistsList() {
+    Cursor getArtistsList() {
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
         String tables = ARTISTS + " INNER JOIN " + ARTISTS_GENRES + " ON " +
                 ARTISTS + "." + Artists.ID + "=" + ARTISTS_GENRES + "." + ArtistsGenres.ARTIST_ID +
@@ -52,7 +52,7 @@ class DbBackend implements DbContract {
         return c;
     }
 
-    public void insertArtistsList(List<Artist> artistList) {
+    void insertArtistsList(List<Artist> artistList) {
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
         db.beginTransaction();
 

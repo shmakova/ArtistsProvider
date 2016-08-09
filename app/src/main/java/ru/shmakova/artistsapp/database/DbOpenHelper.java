@@ -8,7 +8,7 @@ class DbOpenHelper extends SQLiteOpenHelper implements DbContract {
 
     private static final int DB_VERSION = 1;
 
-    public DbOpenHelper(Context context) {
+    DbOpenHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
