@@ -26,9 +26,9 @@ class DbBackend implements DbContract {
     Cursor getArtistsList() {
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
         db.enableWriteAheadLogging();
-        String tables = ARTISTS + " INNER JOIN " + ARTISTS_GENRES + " ON " +
+        String tables = ARTISTS + " LEFT JOIN " + ARTISTS_GENRES + " ON " +
                 ARTISTS + "." + Artists.ID + "=" + ARTISTS_GENRES + "." + ArtistsGenres.ARTIST_ID +
-                " INNER JOIN " + GENRES + " ON " +
+                " LEFT JOIN " + GENRES + " ON " +
                 ARTISTS_GENRES + "." + ArtistsGenres.GENRE_ID + "=" + GENRES + "." + Genres.ID;
 
         String[] columns = new String[]{

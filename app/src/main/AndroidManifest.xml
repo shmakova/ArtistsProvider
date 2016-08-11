@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:fullBackupContent="true">
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name="ru.shmakova.artistsapp.ui.activities.MainActivity"
             android:label="@string/main_activity_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

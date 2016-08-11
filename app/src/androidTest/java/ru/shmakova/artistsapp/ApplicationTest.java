@@ -35,15 +35,6 @@ public class ApplicationTest {
 
     @Test
     public void ApplicationTest() {
-        // find Artist in Artists list with ARTIST_NAME name and ARTIST_GENRES genres and tap on it
-        onData(allOf(withArtistName(ARTIST_NAME), withGenres(ARTIST_GENRES))).perform(click());
-
-        // check visibility all items in the opened activity
-        onView(withId(R.id.biography)).check(matches(isDisplayed()));
-        onView(withId(R.id.genres)).check(matches(withText(ARTIST_GENRES)));
-        onView(withId(R.id.info)).check(matches(isDisplayed()));
-        onView(withId(R.id.description)).check(matches(isDisplayed()));
-        onView(withId(R.id.cover_big)).check(matches(isDisplayed()));
     }
 
     public static Matcher<Object> withArtistName(final String artistName) {

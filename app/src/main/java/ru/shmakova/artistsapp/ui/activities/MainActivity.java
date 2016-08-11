@@ -12,17 +12,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.get(this).applicationComponent().inject(this);
-        setContentView(getLayoutInflater().inflate(R.layout.activity_main, null));
+        setContentView(R.layout.activity_main);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
 }
