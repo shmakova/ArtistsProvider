@@ -25,7 +25,6 @@ class DbBackend implements DbContract {
 
     Cursor getArtistsList() {
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
-        db.enableWriteAheadLogging();
         String tables = ARTISTS + " LEFT JOIN " + ARTISTS_GENRES + " ON " +
                 ARTISTS + "." + Artists.ID + "=" + ARTISTS_GENRES + "." + ArtistsGenres.ARTIST_ID +
                 " LEFT JOIN " + GENRES + " ON " +
@@ -55,7 +54,6 @@ class DbBackend implements DbContract {
 
     void insertArtistsList(List<Artist> artistList) {
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
-        db.enableWriteAheadLogging();
         db.beginTransaction();
 
         try {

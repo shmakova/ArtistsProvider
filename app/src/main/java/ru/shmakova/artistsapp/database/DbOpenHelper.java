@@ -36,6 +36,12 @@ class DbOpenHelper extends SQLiteOpenHelper implements DbContract {
     }
 
     @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        setWriteAheadLoggingEnabled(true);
+    }
+
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Updating for dev versions!
         db.execSQL("DROP TABLE " + ARTISTS);
