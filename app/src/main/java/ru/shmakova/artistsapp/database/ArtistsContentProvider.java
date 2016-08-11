@@ -45,11 +45,11 @@ public class ArtistsContentProvider extends ContentProvider {
                 Cursor cursor = null;
 
                 try {
-                    cursor = dbProvider.getArtistsList();
+                    cursor = dbProvider.getArtistsList(projection, selection, selectionArgs, sortOrder);
 
                     if (cursor == null || cursor.getCount() == 0) {
                         saveArtistsToDb();
-                        cursor = dbProvider.getArtistsList();
+                        cursor = dbProvider.getArtistsList(projection, selection, selectionArgs, sortOrder);
                     }
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
@@ -102,16 +102,12 @@ public class ArtistsContentProvider extends ContentProvider {
         call.enqueue(new Callback<List<Artist>>() {
             @Override
             public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
-                try {
-                    dbProvider.insertArtistsList(response.body());
-                } catch (NullPointerException e) {
-                    Timber.e(e.getMessage());
-                }
+                dbProvider.insertArtistsList(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Artist>> call, Throwable t) {
-
+                Timber.e(t.toString());
             }
         });
     }

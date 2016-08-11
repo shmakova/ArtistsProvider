@@ -22,8 +22,11 @@ class DbProvider {
         executor = new CustomExecutor();
     }
 
-    Cursor getArtistsList() throws ExecutionException, InterruptedException {
-        Future<Cursor> result = executor.submit(dbBackend::getArtistsList);
+    Cursor getArtistsList(String[] projection,
+                          String selection,
+                          String[] selectionArgs,
+                          String sortOrder) throws ExecutionException, InterruptedException {
+        Future<Cursor> result = executor.submit(() -> dbBackend.getArtistsList(projection, selection, selectionArgs, sortOrder));
         return result.get();
     }
 

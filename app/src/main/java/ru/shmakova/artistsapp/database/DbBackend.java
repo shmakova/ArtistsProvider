@@ -23,27 +23,38 @@ class DbBackend implements DbContract {
         mDbOpenHelper = dbOpenHelper;
     }
 
-    Cursor getArtistsList() {
+    Cursor getArtistsList(
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder
+    ) {
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
         String tables = ARTISTS + " LEFT JOIN " + ARTISTS_GENRES + " ON " +
                 ARTISTS + "." + Artists.ID + "=" + ARTISTS_GENRES + "." + ArtistsGenres.ARTIST_ID +
                 " LEFT JOIN " + GENRES + " ON " +
                 ARTISTS_GENRES + "." + ArtistsGenres.GENRE_ID + "=" + GENRES + "." + Genres.ID;
 
-        String[] columns = new String[]{
-                ARTISTS + "." + Artists.ID,
-                ARTISTS + "." + Artists.NAME,
-                ARTISTS + "." + Artists.TRACKS,
-                ARTISTS + "." + Artists.ALBUMS,
-                ARTISTS + "." + Artists.DESCRIPTION,
-                ARTISTS + "." + Artists.LINK,
-                ARTISTS + "." + Artists.COVER_SMALL,
-                ARTISTS + "." + Artists.COVER_BIG,
-                "GROUP_CONCAT(" + GENRES + "." + Genres.NAME + ") AS " + Artists.GENRES_LIST
-        };
+        String[] columns;
+
+        if (projection == null) {
+            columns = new String[]{
+                    ARTISTS + "." + Artists.ID,
+                    ARTISTS + "." + Artists.NAME,
+                    ARTISTS + "." + Artists.TRACKS,
+                    ARTISTS + "." + Artists.ALBUMS,
+                    ARTISTS + "." + Artists.DESCRIPTION,
+                    ARTISTS + "." + Artists.LINK,
+                    ARTISTS + "." + Artists.COVER_SMALL,
+                    ARTISTS + "." + Artists.COVER_BIG,
+                    "GROUP_CONCAT(" + GENRES + "." + Genres.NAME + ") AS " + Artists.GENRES_LIST
+            };
+        } else {
+            columns = projection;
+        }
 
         String groupBy = ARTISTS + "." + Artists.NAME;
-        Cursor c = db.query(tables, columns, null, null, groupBy, null, null);
+        Cursor c = db.query(tables, columns, selection, selectionArgs, groupBy, null, sortOrder);
 
         if (c != null) {
             c.moveToFirst();
