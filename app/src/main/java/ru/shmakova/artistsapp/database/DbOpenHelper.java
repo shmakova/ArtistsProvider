@@ -30,7 +30,8 @@ class DbOpenHelper extends SQLiteOpenHelper implements DbContract {
         db.execSQL(
                 "CREATE TABLE " + ARTISTS_GENRES + "(" +
                         ArtistsGenres.ARTIST_ID + " INTEGER NOT NULL, " +
-                        ArtistsGenres.GENRE_ID + " INTEGER NOT NULL" +
+                        ArtistsGenres.GENRE_ID + " INTEGER NOT NULL," +
+                        "PRIMARY KEY (" + ArtistsGenres.ARTIST_ID + ", " + ArtistsGenres.GENRE_ID + ")" +
                         ")");
     }
 
